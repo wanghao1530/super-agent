@@ -9,6 +9,12 @@
   --accent: #4f46e5;
   --accent-strong: #4338ca;
   --accent-soft: #eef0ff;
+  --button-bg: #2563eb;
+  --button-bg-hover: #1d4ed8;
+  --button-bg-active: #1e40af;
+  --button-fg: #ffffff;
+  --button-shadow: 0 10px 24px rgba(37, 99, 235, 0.32);
+  --button-focus: #93c5fd;
   --success: #0f9d76;
   --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
   --radius-lg: 22px;
@@ -29,6 +35,12 @@
   --accent: #818cf8;
   --accent-strong: #a5b4fc;
   --accent-soft: #1b2444;
+  --button-bg: #2563eb;
+  --button-bg-hover: #1d4ed8;
+  --button-bg-active: #1e40af;
+  --button-fg: #ffffff;
+  --button-shadow: 0 10px 24px rgba(37, 99, 235, 0.45);
+  --button-focus: #93c5fd;
   --success: #34d399;
   --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
   color-scheme: dark;
@@ -150,19 +162,27 @@ code {
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--button-bg);
   border-radius: 50%;
-  background: var(--surface-muted);
-  color: var(--text);
+  background: var(--button-bg);
+  color: var(--button-fg);
   font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   transform: translateY(-1px);
-  border-color: var(--accent);
+  border-color: var(--button-bg-hover);
+  background: var(--button-bg-hover);
+}
+
+.theme-toggle:focus-visible,
+.button:focus-visible,
+.task__remove:focus-visible {
+  outline: 2px solid var(--button-focus);
+  outline-offset: 2px;
 }
 
 /* ---------- Hero ---------- */
@@ -244,6 +264,8 @@ code {
   padding: 9px 18px;
   border: 1px solid transparent;
   border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--button-fg);
   font: inherit;
   font-weight: 600;
   font-size: 0.94rem;
@@ -252,40 +274,67 @@ code {
   transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.button:hover,
+.button:focus-visible {
+  background: var(--button-bg-hover);
+}
+
 .button:active {
   transform: translateY(1px);
+  background: var(--button-bg-active);
 }
 
 .button--primary {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 32%, transparent);
+  background: var(--button-bg);
+  color: var(--button-fg);
+  box-shadow: var(--button-shadow);
 }
 
 .button--primary:hover,
 .button--primary:focus-visible {
-  background: var(--accent-strong);
+  background: var(--button-bg-hover);
+}
+
+.button--primary:active {
+  background: var(--button-bg-active);
 }
 
 .button--ghost {
-  border-color: var(--border);
-  background: var(--surface);
-  color: var(--text);
+  border-color: var(--button-bg);
+  background: var(--button-bg);
+  color: var(--button-fg);
 }
 
 .button--ghost:hover,
 .button--ghost:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent-strong);
+  border-color: var(--button-bg-hover);
+  background: var(--button-bg-hover);
+  color: var(--button-fg);
+}
+
+.button--ghost:active {
+  border-color: var(--button-bg-active);
+  background: var(--button-bg-active);
 }
 
 .button--square {
   width: 42px;
   padding: 0;
-  border-color: var(--border);
-  background: var(--surface-muted);
-  color: var(--text);
+  border-color: var(--button-bg);
+  background: var(--button-bg);
+  color: var(--button-fg);
   font-size: 1.2rem;
+}
+
+.button--square:hover,
+.button--square:focus-visible {
+  border-color: var(--button-bg-hover);
+  background: var(--button-bg-hover);
+}
+
+.button--square:active {
+  border-color: var(--button-bg-active);
+  background: var(--button-bg-active);
 }
 
 .button:disabled {
@@ -476,19 +525,21 @@ code {
 }
 
 .task__remove {
-  border: 0;
-  background: none;
-  color: var(--muted);
+  border: 1px solid var(--button-bg);
+  background: var(--button-bg);
+  color: var(--button-fg);
   font-size: 1.15rem;
   line-height: 1;
-  padding: 2px 4px;
+  padding: 2px 6px;
   cursor: pointer;
   border-radius: 6px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .task__remove:hover,
 .task__remove:focus-visible {
-  color: #ef4444;
+  border-color: var(--button-bg-hover);
+  background: var(--button-bg-hover);
 }
 
 .task-empty {
